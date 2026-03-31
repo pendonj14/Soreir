@@ -2,22 +2,22 @@ import { Reservation } from "../models/reservation.model.js";
 
 const createReservation = async (req, res) => {
     try {
-        const {username, email, reservationDate, reservationTime, numberOfGuests, orderedItem} = req.body;
+        const {reservationDate, reservationTime, numberOfGuests, orderedItem} = req.body;
         
         //basic validation
-        if (!username || !email || !reservationDate || !reservationTime || !numberOfGuests || !orderedItem) {
+        if (!reservationDate || !reservationTime || !numberOfGuests || !orderedItem) {
             return res.status(400).json({message: "All fields are required"});
         }
 
         //create new reservation
         const reservation  = await  Reservation.create({
-            username,
-            email,
+            user: req.user.id, // associate reservation with the logged-in user
             reservationDate,
             reservationTime,
             numberOfGuests,
             orderedItem
         });
+        const populated = await reservation.populate("user", "email username");
         res.status(201).json({message: "Reservation created successfully", reservation});
 
     } catch (error) {
@@ -27,7 +27,7 @@ const createReservation = async (req, res) => {
 
 const getReservations = async (req, res) => {
     try {
-        const reservations = await Reservation.find();
+        const reservations = await Reservation.find().populate("user", "email username");
         res.status(200).json({message: "Reservations retrieved successfully", reservations});
     } catch (error) {
         res.status(500).json({message: "Error retrieving reservations", error});

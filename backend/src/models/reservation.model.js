@@ -2,22 +2,10 @@ import mongoose, { Schema } from "mongoose";
 
 const reservationSchema = new Schema(
     {
-        username: {
-            type: String,
-            required: true,
-            unique: true,
-            trim: true,
-            lowercase: true,
-            minLenght: 1,
-            maxLenght: 50
-        },
-        
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-            trim: true,
-            lowercase: true,
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true
         },
 
         reservationDate: {
