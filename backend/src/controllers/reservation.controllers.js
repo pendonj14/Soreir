@@ -1,9 +1,9 @@
 import { Reservation } from "../models/reservation.model.js";
 
-const createReservation = async (req, res) => {
+const createReservation = async (req, res, next) => {
     try {
         const {reservationDate, reservationTime, numberOfGuests, orderedItem} = req.body;
-        
+
         //basic validation
         if (!reservationDate || !reservationTime || !numberOfGuests || !orderedItem) {
             return res.status(400).json({message: "All fields are required"});
@@ -21,21 +21,21 @@ const createReservation = async (req, res) => {
         res.status(201).json({message: "Reservation created successfully", reservation});
 
     } catch (error) {
-        res.status(500).json({message: "Error creating reservation", error});
+        next(error);
     }
 }
 
-const getReservations = async (req, res) => {
+const getReservations = async (req, res, next) => {
     try {
         const reservations = await Reservation.find().populate("user", "email username");
         res.status(200).json({message: "Reservations retrieved successfully", reservations});
     } catch (error) {
-        res.status(500).json({message: "Error retrieving reservations", error});
+        next(error);
     }
 }
 
 
-const updateReservation = async (req, res) => {
+const updateReservation = async (req, res, next) => {
     try {
         const {id} = req.params;
 
@@ -47,11 +47,11 @@ const updateReservation = async (req, res) => {
         res.status(200).json({message: "Reservation updated successfully", reservation: updatedReservation});
 
     } catch (error) {
-        res.status(500).json({message: "Error updating reservation", error});
+        next(error);
     }
 }
 
-const deleteReservation = async (req, res) => {
+const deleteReservation = async (req, res, next) => {
     try {
         const {id} = req.params;
 
@@ -62,7 +62,7 @@ const deleteReservation = async (req, res) => {
 
         res.status(200).json({message: "Reservation deleted successfully", reservation: deletedReservation});
     } catch (error) {
-        res.status(500).json({message: "Error deleting reservation", error});
+        next(error);
     }
 }
 

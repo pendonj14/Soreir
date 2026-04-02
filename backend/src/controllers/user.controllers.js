@@ -1,10 +1,10 @@
 import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
-const registerUser = async (req, res) => {
+const registerUser = async (req, res, next) => {
     try {
         const {username, email, password} = req.body;
-        
+
         //basic validation
         if (!username || !email || !password) {
             return res.status(400).json({message: "All fields are required"});
@@ -24,15 +24,15 @@ const registerUser = async (req, res) => {
             loggedIn: false
         });
 
-        res.status(201).json({message: "User registered successfully", 
+        res.status(201).json({message: "User registered successfully",
             user: {id: user._id, username: user.username, email: user.email}});
 
     } catch (error) {
-        res.status(500).json({message: "Server error", error: error.message});
+        next(error);
     }
 }
 
-const loginUser = async (req, res) => {
+const loginUser = async (req, res, next) => {
     try {
         const {email, password} = req.body;
         
@@ -58,23 +58,23 @@ const loginUser = async (req, res) => {
         res.status(200).json({message: "Login successful", token,user: {id: user._id, username: user.username, email: user.email}});
     
     } catch (error) {
-        res.status(500).json({message: "Server error", error: error.message});
+        next(error);
     }
 }
 
-const logoutUser = async (req, res) => {
+const logoutUser = async (req, res, next) => {
     const {email} = req.body;
     try {
         const user = await User.findOne({email: email});
         if (!user) {
             return res.status(400).json({message: "User not found"});
         }
-        
+
         user.loggedIn = false;
         await user.save();
         res.status(200).json({message: "Logout successful"});
     } catch (error) {
-        res.status(500).json({message: "Server error", error: error.message});
+        next(error);
     }
 }
 export {registerUser, loginUser, logoutUser};
