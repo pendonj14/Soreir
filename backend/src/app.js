@@ -5,6 +5,7 @@ import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import errorHandler from "./middleware/error.middleware.js";
+import menuRouter from "./routes/menu.route.js";
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -23,5 +24,6 @@ const app = express();
     app.use(express.json());
     app.use("/api/users", userRouter);
     app.use("/api/reservations", reservationRouter);
+    app.use("/api/menu", menuRouter);
     app.use(errorHandler);
 export default app;

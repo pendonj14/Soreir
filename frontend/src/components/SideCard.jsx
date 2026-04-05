@@ -1,5 +1,8 @@
-export const SideCard = ({ linkText, bgImage }) => (
-  <div
+import { Link } from 'react-router-dom'
+
+export const SideCard = ({ linkText, bgImage, to }) => (
+  <Link
+    to={to}
     className="relative flex-1 rounded-3xl overflow-hidden bg-cover bg-center group cursor-pointer"
     style={{ backgroundImage: `url(${bgImage})` }}
   >
@@ -13,5 +16,5 @@ export const SideCard = ({ linkText, bgImage }) => (
         →
       </span>
     </div>
-  </div>
+  </Link>
 );

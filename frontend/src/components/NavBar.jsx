@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export const Navbar = () => (
   <nav className="absolute top-8 left-8 z-20 flex items-center gap-10 bg-black/40 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/10 text-white shadow-xl">
     {/* Logo Area */}
@@ -8,16 +10,16 @@ export const Navbar = () => (
          <div className="w-full h-[2px] bg-white"></div>
          <div className="w-full h-[2px] bg-white"></div>
       </div>
-      <div className="flex items-center">
+      <Link to="/" className="flex items-center">
         <img src="/iconfinal.png" alt="Logo" className="h-10 w-auto" />
         <span className="text-xl tracking-widest font-serif">SOIRÉE</span>
-      </div>
+      </Link>
     </div>
 
     {/* Desktop Links */}
     <div className="hidden md:flex gap-8 text-xs tracking-[0.15em] uppercase text-white/70">
-      <a href="#menu" className="hover:text-white transition-colors">Menu</a>
-      <a href="#about" className="hover:text-white transition-colors">About</a>
+      <Link to="menu" className="hover:text-white transition-colors">Menu</Link>
+      <Link to="about" className="hover:text-white transition-colors">About</Link>
     </div>
 
     {/* CTA Button */}

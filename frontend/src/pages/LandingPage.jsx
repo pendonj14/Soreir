@@ -38,15 +38,18 @@ export const LandingPage = () => {
         <div className="lg:col-span-1 flex flex-col gap-4 h-full">
           <SideCard
             linkText="Menu"
-            bgImage="/menu.avif" // Replace with your image path
+            bgImage="/menu.avif"
+            to="/menu"
           />
           <SideCard
             linkText="Reservation"
-            bgImage="/reservation.avif" // Replace with your image path
+            bgImage="/reservation.avif"
+            to="/reservation"
           />
           <SideCard
             linkText="Our Restaurant"
-            bgImage="/about.avif" // Replace with your image path
+            bgImage="/about.avif"
+            to="/about"
           />
         </div>
 
