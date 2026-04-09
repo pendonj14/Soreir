@@ -1,9 +1,11 @@
 import { MenuItem } from "../models/menu.models.js";
+import { uploadToCloudinary } from "../config/cloudinary.js";
 
 const createMenu = async (req, res, next) => {
     try {
         const { name, description, price, category } = req.body;
-        const menuItem = new MenuItem({ name, description, price, category });
+        const image = req.file ? await uploadToCloudinary(req.file.buffer) : null;
+        const menuItem = new MenuItem({ name, description, price, category, image });
         await menuItem.save();
         res.status(201).json(menuItem);
     } catch (error) {
@@ -23,7 +25,9 @@ const getMenuItems = async (req, res, next) => {
 const updateMenuItem = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const updatedMenuItem = await MenuItem.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+        const updates = { ...req.body };
+        if (req.file) updates.image = await uploadToCloudinary(req.file.buffer);
+        const updatedMenuItem = await MenuItem.findByIdAndUpdate(id, updates, { new: true, runValidators: true });
         if (!updatedMenuItem) {
             return res.status(404).json({ message: "Menu item not found" });
         }

@@ -16,7 +16,7 @@ const limiter = rateLimit({
 const app = express();
     app.use(helmet());
     app.use(cors({
-        origin: process.env.CLIENT_URL,  // e.g. "http://localhost:5173"
+        origin: (_origin, callback) => callback(null, process.env.CLIENT_URL),
         methods: ["GET", "POST", "PATCH", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"],
     }));
