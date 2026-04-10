@@ -14,7 +14,7 @@ const TOFU_IMAGES = [
 
 export const AboutPage = () => {
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-[#070707] p-4 font-sans text-[#e8e6e3]">
+    <div className="flex h-screen w-full items-center justify-center bg-transparent p-4 font-sans text-[#e8e6e3]">
       <div className="grid h-full w-full grid-cols-6 grid-rows-6 gap-4 rounded-xl">
 
         {/* Salmon: Main "ABOUT" Image */}
@@ -35,7 +35,7 @@ export const AboutPage = () => {
           <h2 className="mb-12 font-serif text-2xl uppercase leading-snug tracking-widest text-[#d8d3c5]">
             Sushi Artistry <br /> Redefined
           </h2>
-          <p className="max-w-md text-xs leading-relaxed text-gray-400">
+          <p className="max-w-md text-xs leading-relaxed text-gray-400 font">
             Where culinary craftsmanship meets modern elegance. Indulge in the finest sushi, expertly curated to elevate your dining experience.
           </p>
         </div>

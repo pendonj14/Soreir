@@ -24,7 +24,7 @@ export const MenuPage = () => {
         </div>
 
         {/* RIGHT HALF: Menu Content */}
-        <div className="col-span-2 row-span-4 rounded-3xl bg-white/5 border border-white/10 flex flex-col items-center py-10 px-8 overflow-y-auto">
+        <div className="col-span-2 row-span-4 rounded-3xl bg-white/1 border border-white/10 flex flex-col items-center py-10 px-8 overflow-y-auto">
 
           {/* Category Pills */}
           <div className="flex items-center gap-2 mb-8 bg-white/5 p-1 rounded-full border border-white/10 shrink-0">
@@ -44,7 +44,7 @@ export const MenuPage = () => {
           </div>
 
           {/* Menu Items */}
-          <div className="w-full flex flex-col gap-8">
+          <div className="w-full flex flex-col gap-8 px-25">
             {loading && <p className="text-white/40 text-sm">Loading...</p>}
             {activeCategory && menuData[activeCategory] && (
               <>

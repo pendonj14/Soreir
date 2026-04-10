@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@theme {
+  --font-bodoni: "Bodoni Moda", serif;
+}
+
+body {
+  color: #2c2c2c;
+}

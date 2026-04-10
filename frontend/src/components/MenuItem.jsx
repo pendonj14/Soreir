@@ -1,8 +1,8 @@
 export const MenuItem = ({ name, description, price, image }) => (
   <div className="flex gap-6 items-start group">
     {/* Thumbnail */}
-    <div className="w-24 h-16 shrink-0 bg-white/5 rounded-lg overflow-hidden flex items-center justify-center p-1">
-      <img src={image} alt={name} className="object-contain w-full h-full drop-shadow-lg" />
+    <div className="w-38 h-25 shrink-0 rounded-lg overflow-hidden flex items-center justify-center p-1">
+      <img src={image} alt={name} className="object-contain w-full h-full drop-shadow-lg rounded-xl" />
     </div>
     
     {/* Details */}
