@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { Carousel } from '../components/Carousel';
 
 const TAMAGO_IMAGES = [
   { src: "https://framerusercontent.com/images/I8AGYbzHAG3DaCqU2wYCmWnrFLw.webp?width=1600&height=1600", alt: "Customers Dining" },
@@ -12,73 +12,17 @@ const TOFU_IMAGES = [
   { src: "https://framerusercontent.com/images/eN3OMUIE7k3yknjR7LKFRc8TlU.webp?scale-down-to=1024&width=1600&height=1600", alt: "Sushi Artistry" },
 ];
 
-const Carousel = ({ images, className }) => {
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [images.length]);
-
-  const prev = () => setCurrent((c) => (c - 1 + images.length) % images.length);
-  const next = () => setCurrent((c) => (c + 1) % images.length);
-
-  return (
-    <div className={`relative overflow-hidden rounded-2xl border border-white/5 bg-[#111] shadow-lg ${className}`}>
-      {images.map((img, i) => (
-        <img
-          key={i}
-          src={img.src}
-          alt={img.alt}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-            i === current ? 'opacity-80' : 'opacity-0'
-          }`}
-        />
-      ))}
-      <button
-        onClick={prev}
-        className="absolute left-3 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/40 backdrop-blur-md transition-colors hover:bg-black/60"
-      >
-        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="white">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      <button
-        onClick={next}
-        className="absolute right-3 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/40 backdrop-blur-md transition-colors hover:bg-black/60"
-      >
-        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="white">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-      <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
-        {images.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              i === current ? 'w-4 bg-white' : 'w-1.5 bg-white/40'
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
 export const AboutPage = () => {
   return (
     <div className="flex h-screen w-full items-center justify-center bg-[#070707] p-4 font-sans text-[#e8e6e3]">
-      <div className="grid h-full w-full grid-cols-5 grid-rows-5 gap-4 rounded-xl">
+      <div className="grid h-full w-full grid-cols-6 grid-rows-6 gap-4 rounded-xl">
 
         {/* Salmon: Main "ABOUT" Image */}
-        <div className="group relative col-span-2 row-span-5 flex items-end overflow-hidden rounded-2xl border border-white/5 bg-[#111] shadow-lg">
+        <div className="group relative col-span-3 row-span-6 flex items-end overflow-hidden rounded-2xl border border-white/5 bg-[#111] shadow-lg">
           <img
             src="https://framerusercontent.com/images/SMJY8uQcFDPv5vRNMRmZijjygkM.webp?scale-down-to=2048&width=2000&height=2400"
             alt="Restaurant Bar"
-            className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
+            className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-700"
           />
           <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
           <h1 className="relative z-10 p-8 font-serif text-7xl tracking-widest text-[#e8e4dc]">
