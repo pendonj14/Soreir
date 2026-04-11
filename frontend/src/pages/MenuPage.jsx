@@ -1,10 +1,20 @@
-import { Navbar } from '../components/NavBar';
+import { useRef } from 'react';
 import { MenuItem } from '../components/MenuItem';
 import { MenuSectionTitle } from '../components/MenuSectionTitle';
 import { useMenu } from '../hooks/useMenu';
 
 export const MenuPage = () => {
-  const { menuData, categories, activeCategory, setActiveCategory, loading } = useMenu();
+  const { menuData, categories, loading } = useMenu();
+  const sectionRefs = useRef({});
+  const scrollContainerRef = useRef(null);
+
+  const scrollToCategory = (cat) => {
+    const container = scrollContainerRef.current;
+    const section = sectionRefs.current[cat];
+    if (!container || !section) return;
+    const offset = section.offsetTop - container.offsetTop;
+    container.scrollTo({ top: offset, behavior: 'smooth' });
+  };
 
   return (
     <div className="h-screen bg-[#0a0a0a] p-4 font-sans text-white">
@@ -24,36 +34,40 @@ export const MenuPage = () => {
         </div>
 
         {/* RIGHT HALF: Menu Content */}
-        <div className="col-span-2 row-span-4 rounded-3xl bg-white/1 border border-white/10 flex flex-col items-center py-10 px-8 overflow-y-auto">
+        <div
+          ref={scrollContainerRef}
+          className="col-span-2 row-span-4 rounded-3xl bg-white/1 border border-white/10 flex flex-col items-center py-10 px-8 overflow-y-auto"
+        >
 
-          {/* Category Pills */}
-          <div className="flex items-center gap-2 mb-8 bg-white/5 p-1 rounded-full border border-white/10 shrink-0">
+          {/* Category Buttons */}
+          <div className="flex items-center gap-3 mb-8 shrink-0">
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2 rounded-full text-xs tracking-widest transition-all duration-300 ${
-                  activeCategory === cat
-                    ? 'bg-white text-black'
-                    : 'text-white/60 hover:text-white'
-                }`}
+                onClick={() => scrollToCategory(cat)}
+                className="px-6 py-2 rounded-lg text-xs tracking-widest uppercase border border-white/30 bg-transparent text-white hover:border-white transition-all duration-300"
               >
                 {cat}
               </button>
             ))}
           </div>
 
-          {/* Menu Items */}
-          <div className="w-full flex flex-col gap-8 px-25">
+          {/* All categories and their items */}
+          <div className="w-full flex flex-col gap-12 px-25">
             {loading && <p className="text-white/40 text-sm">Loading...</p>}
-            {activeCategory && menuData[activeCategory] && (
-              <>
-                <MenuSectionTitle title={activeCategory} />
-                {menuData[activeCategory].map((item) => (
+            {categories.map((cat) => (
+              <div
+                key={cat}
+                data-category={cat}
+                ref={(el) => (sectionRefs.current[cat] = el)}
+                className="flex flex-col gap-8"
+              >
+                <MenuSectionTitle title={cat} />
+                {menuData[cat]?.map((item) => (
                   <MenuItem key={item._id} {...item} />
                 ))}
-              </>
-            )}
+              </div>
+            ))}
           </div>
 
         </div>

@@ -31,7 +31,7 @@ export const AboutPage = () => {
         </div>
 
         {/* Broccoli: Sushi Artistry Redefined */}
-        <div className="col-span-2 row-span-2 flex flex-col justify-center rounded-2xl border border-white/5 bg-[#0c0c0c] p-10 shadow-lg">
+        <div className="col-span-2 row-span-2 flex flex-col justify-center rounded-2xl border border-white/5 bg-transparent p-10 shadow-lg">
           <h2 className="mb-12 font-serif text-2xl uppercase leading-snug tracking-widest text-[#d8d3c5]">
             Sushi Artistry <br /> Redefined
           </h2>

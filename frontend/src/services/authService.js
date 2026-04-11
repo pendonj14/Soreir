@@ -1,0 +1,31 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
+const request = async (endpoint, options = {}) => {
+  const res = await fetch(`${API_URL}${endpoint}`, {
+    headers: { 'Content-Type': 'application/json' },
+    ...options,
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || 'Request failed');
+  return data;
+};
+
+export const authService = {
+  login: (email, password) =>
+    request('/users/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+    }),
+
+  register: (username, email, password) =>
+    request('/users/register', {
+      method: 'POST',
+      body: JSON.stringify({ username, email, password }),
+    }),
+
+  logout: (email) =>
+    request('/users/logout', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    }),
+};
