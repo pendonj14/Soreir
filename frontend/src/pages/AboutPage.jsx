@@ -25,17 +25,17 @@ export const AboutPage = () => {
             className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-700"
           />
           <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
-          <h1 className="relative z-10 p-8 font-serif text-7xl tracking-widest text-[#e8e4dc]">
+          <h1 className="relative z-10 p-8 font-serif text-9xl tracking-widest text-[#e8e4dc]">
             ABOUT
           </h1>
         </div>
 
         {/* Broccoli: Sushi Artistry Redefined */}
-        <div className="col-span-2 row-span-2 flex flex-col justify-center rounded-2xl border border-white/5 bg-transparent p-10 shadow-lg">
-          <h2 className="mb-12 font-serif text-2xl uppercase leading-snug tracking-widest text-[#d8d3c5]">
+        <div className="col-span-2 row-span-2 flex flex-col justify-between rounded-2xl border border-white/5 bg-transparent p-10 shadow-lg ">
+          <h2 className="mb-12 text-3xl uppercase leading-snug tracking-widest text-[#d8d3c5] font-noto-serif-jp">
             Sushi Artistry <br /> Redefined
           </h2>
-          <p className="max-w-md text-xs leading-relaxed text-gray-400 font">
+          <p className="max-w-md text-sm leading-relaxed text-gray-400 font-hanken-grotesk">
             Where culinary craftsmanship meets modern elegance. Indulge in the finest sushi, expertly curated to elevate your dining experience.
           </p>
         </div>
@@ -44,43 +44,43 @@ export const AboutPage = () => {
         <Carousel images={TAMAGO_IMAGES} className="col-span-1 row-span-2" />
 
         {/* Pork: Trip Advisor */}
-        <div className="col-span-1 row-span-1 flex flex-col items-center justify-center rounded-2xl border border-white/5 bg-[#0c0c0c] p-4 text-center shadow-lg">
-          <div className="mb-2 flex gap-1 text-[10px] text-[#d8d3c5]">
+        <div className="col-span-1 row-span-1 flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-transparent p-4 text-center shadow-lg">
+          <div className="mb-2 flex gap-1 text-[15px] text-[#d8d3c5]">
             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
           </div>
-          <h3 className="font-serif text-sm tracking-[0.2em] text-[#d8d3c5]">TRIP ADVISOR</h3>
-          <p className="mt-2 text-[8px] tracking-[0.2em] text-gray-500">BEST SUSHI</p>
+          <h3 className="font-serif text-s tracking-[0.2em] text-[#d8d3c5]">TRIP ADVISOR</h3>
+          <p className="mt-2 text-[10px] tracking-[0.2em] text-gray-500">BEST SUSHI</p>
         </div>
 
         {/* Edamame: Michelin Guide */}
-        <div className="col-span-1 row-span-1 flex flex-col items-center justify-center rounded-2xl border border-white/5 bg-[#0c0c0c] p-4 text-center shadow-lg">
-          <div className="mb-2 flex gap-1 text-[10px] text-[#d8d3c5]">
+        <div className="col-span-1 row-span-1 flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-transparent p-4 text-center shadow-lg">
+          <div className="mb-2 flex gap-1 text-[15px] text-[#d8d3c5]">
             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
           </div>
-          <h3 className="font-serif text-sm tracking-[0.2em] text-[#d8d3c5]">MICHELIN GUIDE</h3>
-          <p className="mt-2 text-[8px] tracking-[0.2em] text-gray-500">QUALITY FOOD</p>
+          <h3 className="font-serif text-s tracking-[0.2em] text-[#d8d3c5]">MICHELIN GUIDE</h3>
+          <p className="mt-2 text-[10px] tracking-[0.2em] text-gray-500">QUALITY FOOD</p>
         </div>
 
         {/* Tomato: Start Dining */}
-        <div className="col-span-1 row-span-1 flex flex-col items-center justify-center rounded-2xl border border-white/5 bg-[#0c0c0c] p-4 text-center shadow-lg">
-          <div className="mb-2 flex gap-1 text-[10px] text-[#d8d3c5]">
+        <div className="col-span-1 row-span-1 flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-transparent p-4 text-center shadow-lg">
+          <div className="mb-2 flex gap-1 text-[15px] text-[#d8d3c5]">
             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
           </div>
-          <h3 className="font-serif text-sm tracking-[0.2em] text-[#d8d3c5]">START DINING</h3>
-          <p className="mt-2 text-[8px] tracking-[0.2em] text-gray-500">COOL VIBE</p>
+          <h3 className="font-serif text-s tracking-[0.2em] text-[#d8d3c5]">START DINING</h3>
+          <p className="mt-2 text-[10px] tracking-[0.2em] text-gray-500">COOL VIBE</p>
         </div>
 
         {/* Tofu: Carousel */}
         <Carousel images={TOFU_IMAGES} className="col-span-1 row-span-3" />
 
         {/* Tempura: Our Story */}
-        <div className="col-span-2 row-span-3 flex flex-col items-center justify-center rounded-2xl border border-white/5 bg-[#0c0c0c] p-8 text-center shadow-lg">
+        <div className="col-span-2 row-span-3 flex flex-col items-center justify-between rounded-2xl border border-white/10  bg-transparent p-8 text-center shadow-lg py-15">
           <div className="mb-6 flex items-center gap-4">
             <div className="h-[1px] w-4 bg-[#d8d3c5]/30"></div>
-            <h3 className="font-serif text-sm tracking-[0.2em] text-[#d8d3c5]">OUR STORY</h3>
+            <h3 className="font-noto-serif-jp text-3xl tracking-[0.2em] text-[#d4ccb6]">OUR STORY</h3>
             <div className="h-[1px] w-4 bg-[#d8d3c5]/30"></div>
           </div>
-          <p className="text-xs leading-relaxed text-gray-400">
+          <p className="text-s leading-relaxed text-gray-400 font-hanken-grotesk mb-20">
             Founded with a passion for culinary excellence, Soirée's journey began in the heart of the city. Over years, it evolved into a haven for sushi enthusiasts, celebrated for its artful mastery and devotion to redefining gastronomy.
           </p>
         </div>

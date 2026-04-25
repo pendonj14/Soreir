@@ -2,8 +2,31 @@
 
 @theme {
   --font-bodoni: "Bodoni Moda", serif;
+  --font-hanken-grotesk: "Hanken Grotesk", sans-serif;
+  --font-noto-serif-jp: "Noto Serif JP", serif;
 }
 
 body {
-  color: #2c2c2c;
+  color: #d4ccb6;
+  background-color: #0a0a0a;
+}
+
+/* Force all text to use the desired color */
+h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label {
+  color: #d4ccb6 !important;
+}
+
+.hanken-grotesk-font {
+  font-family: var(--font-hanken-grotesk);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.noto-serif-jp-font {
+  font-family: var(--font-noto-serif-jp);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }

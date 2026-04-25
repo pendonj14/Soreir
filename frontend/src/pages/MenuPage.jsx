@@ -17,7 +17,7 @@ export const MenuPage = () => {
   };
 
   return (
-    <div className="h-screen bg-[#0a0a0a] p-4 font-sans text-white">
+    <div className="h-screen p-4 font-sans text-white">
       <div className="grid grid-cols-4 grid-rows-4 gap-4 h-full">
 
         {/* LEFT HALF: Hero Image */}
@@ -36,7 +36,7 @@ export const MenuPage = () => {
         {/* RIGHT HALF: Menu Content */}
         <div
           ref={scrollContainerRef}
-          className="col-span-2 row-span-4 rounded-3xl bg-white/1 border border-white/10 flex flex-col items-center py-10 px-8 overflow-y-auto"
+          className="col-span-2 row-span-4 rounded-3xl border border-white/10 bg-transparent flex flex-col items-center py-10 px-8 overflow-y-auto"
         >
 
           {/* Category Buttons */}
