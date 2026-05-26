@@ -3,7 +3,7 @@ import { uploadToCloudinary } from "../config/cloudinary.js";
 import { redisClient } from "../config/redis.js";
 
 const MENU_CACHE_KEY = "menu:all";
-const MENU_CACHE_TTL = 600; // 10 minutes in seconds
+const MENU_CACHE_TTL = 600;
 
 const createMenu = async (req, res, next) => {
     try {
@@ -35,11 +35,10 @@ const getMenuItems = async (req, res, next) => {
             console.warn("Redis read failed, falling back to DB:", cacheErr.message);
         }
 
-        // Cache MISS or Redis down — query MongoDB
+        // Cache miss — query MongoDB
         console.log("🔍 Cache MISS — querying MongoDB");
         const menuItems = await MenuItem.find();
 
-        // Try to cache the result, but don't crash if it fails
         try {
             await redisClient.set(
                 MENU_CACHE_KEY,

@@ -28,7 +28,6 @@ app.use(cors({
             "http://localhost:4173"
         ];
 
-        // Allow if no origin (e.g. Postman), matches allowed origins, or is a Vercel preview/deployment
         if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
             callback(null, true);
         } else {

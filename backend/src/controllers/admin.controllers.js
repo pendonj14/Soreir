@@ -88,32 +88,20 @@ const deleteAllDoneReservations = async (req, res, next) => {
 
 const getAdminMenuItems = async (req, res, next) => {
   try {
-    // Try cache first, but don't crash if Redis is down
-    try {
-      const cachedData = await redisClient.get(MENU_CACHE_KEY);
-      if (cachedData) {
-        console.log("📦 Cache HIT — serving menu from Redis");
-        return res.status(200).json(JSON.parse(cachedData));
-      }
-    } catch (cacheErr) {
-      console.warn("Redis read failed, falling back to DB:", cacheErr.message);
-    }
+    const cachedData = await redisClient.get(MENU_CACHE_KEY);
 
-    // Cache MISS or Redis down — query MongoDB
+    if (cachedData) {
+      console.log("📦 Cache HIT — serving menu from Redis");
+      return res.status(200).json(JSON.parse(cachedData));
+    }
     console.log("🔍 Cache MISS — querying MongoDB");
     const items = await MenuItem.find();
 
-    // Try to cache the result, but don't crash if it fails
-    try {
-      await redisClient.set(
-        MENU_CACHE_KEY,
-        JSON.stringify(items),
-        { EX: MENU_CACHE_TTL }
-      );
-    } catch (cacheErr) {
-      console.warn("Redis write failed:", cacheErr.message);
-    }
-
+    await redisClient.set(
+      MENU_CACHE_KEY,
+      JSON.stringify(items),
+      { EX: MENU_CACHE_TTL }
+    );
     return res.status(200).json(items);
   } catch (error) {
     next(error);
@@ -125,10 +113,7 @@ const createAdminMenuItem = async (req, res, next) => {
     const { name, description, price, category } = req.body;
     const image = req.file ? await uploadToCloudinary(req.file.buffer) : null;
     const item = await MenuItem.create({ name, description, price, category, image });
-
-    try { await redisClient.del(MENU_CACHE_KEY); } catch (cacheErr) {
-      console.warn("Redis invalidation failed:", cacheErr.message);
-    }
+    await redisClient.del(MENU_CACHE_KEY);
 
     res.status(201).json(item);
   } catch (error) {
@@ -143,11 +128,7 @@ const updateAdminMenuItem = async (req, res, next) => {
     if (req.file) updates.image = await uploadToCloudinary(req.file.buffer);
     const item = await MenuItem.findByIdAndUpdate(id, updates, { new: true, runValidators: true });
     if (!item) return res.status(404).json({ message: 'Menu item not found' });
-
-    try { await redisClient.del(MENU_CACHE_KEY); } catch (cacheErr) {
-      console.warn("Redis invalidation failed:", cacheErr.message);
-    }
-
+    await redisClient.del(MENU_CACHE_KEY);
     res.status(200).json(item);
   } catch (error) {
     next(error);
@@ -159,11 +140,7 @@ const deleteAdminMenuItem = async (req, res, next) => {
     const { id } = req.params;
     const item = await MenuItem.findByIdAndDelete(id);
     if (!item) return res.status(404).json({ message: 'Menu item not found' });
-
-    try { await redisClient.del(MENU_CACHE_KEY); } catch (cacheErr) {
-      console.warn("Redis invalidation failed:", cacheErr.message);
-    }
-
+    await redisClient.del(MENU_CACHE_KEY);
     res.status(200).json({ message: 'Menu item deleted' });
   } catch (error) {
     next(error);

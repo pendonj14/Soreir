@@ -81,7 +81,5 @@ export default function (data) {
     reservationOk.add(passed);
     reservationLatency.add(res.timings.duration);
 
-    // Small pause so each VU does a few iterations across the 15s window
-    // instead of one giant burst — closer to "10 concurrent users clicking submit".
     sleep(1);
 }

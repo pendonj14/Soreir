@@ -1,0 +1,11 @@
+{
+  "remoteName": "origin",
+  "projects": [
+    {
+      "id": "prj_vielst5oWMHR6cTEklg9EjDcsizP",
+      "name": "soiree",
+      "directory": "frontend",
+      "orgId": "team_RdnmGfA2osv7MpXkb9lxtcQm"
+    }
+  ]
+}

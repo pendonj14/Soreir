@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { reservationService } from '../services/reservationService'
 import { PageTransition } from '../components/PageTransition'
+import { AuthModal } from '../components/AuthModal'
 
 const INITIAL_FORM = {
   reservationDate: '',
@@ -19,9 +20,16 @@ export const ReservationPage = () => {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
 
+  const [showAuthModal, setShowAuthModal] = useState(!isAuthenticated)
+
   useEffect(() => {
+    if (isAuthenticated) setShowAuthModal(false)
+  }, [isAuthenticated])
+
+  const handleAuthClose = () => {
+    setShowAuthModal(false)
     if (!isAuthenticated) navigate('/')
-  }, [isAuthenticated, navigate])
+  }
 
   const handleChange = (e) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
@@ -50,6 +58,9 @@ export const ReservationPage = () => {
 
   return (
     <PageTransition>
+      {showAuthModal && (
+        <AuthModal onClose={handleAuthClose} redirectTo="/reservation" />
+      )}
       <div className="flex flex-col md:flex-row w-full gap-4 p-4 font-sans text-[#e8e6e3] min-h-screen pb-20 md:pb-4 md:h-screen">
 
         {/* Image & Title */}

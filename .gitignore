@@ -145,7 +145,4 @@ EEE
 
 .claude
 .superpowers
-.docsCLAUDE.local.md
-
-.vercel
-.env*.local
+docs
